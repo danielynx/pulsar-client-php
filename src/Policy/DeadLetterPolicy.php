@@ -17,6 +17,7 @@ use Pulsar\ConsumerOptions;
 use Pulsar\Exception;
 use Pulsar\Exception\OptionsException;
 use Pulsar\Message;
+use Pulsar\MessageOptions;
 use Pulsar\Options;
 use Pulsar\Producer;
 use Pulsar\ProducerOptions;
@@ -139,7 +140,9 @@ class DeadLetterPolicy
 
         $producer = new Producer($this->options->getUrl()['url'], $options);
         $producer->connect();
-        $producer->send($message->getPayload());
+        $producer->send($message->getPayload(), [
+            MessageOptions::PROPERTIES => $message->getProperties(),
+        ]);
         $producer->close();
     }
 }
