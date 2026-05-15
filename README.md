@@ -12,6 +12,7 @@
     * [Schema](#Schema)
     * [Reader](#Reader)
     * [Options](#Options)
+    * [MCP Server for AI Agents](#MCP-Server-for-AI-Agents)
     * [License](#License)
 
 ## About
@@ -499,6 +500,31 @@ $reader->close();
 
 * `MessageNotFound::Ignore`
 * `MessageNotFound::CommandParseFail`
+
+## MCP Server for AI Agents
+
+This library includes an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) stdio server that lets AI agents (Cursor, Claude Desktop, etc.) produce, consume, and peek at Pulsar messages. No extra dependencies required.
+
+**Tools:** `pulsar_publish` · `pulsar_consume` · `pulsar_peek`
+
+**Quick setup** — add to `~/.cursor/mcp.json` (Cursor) or `claude_desktop_config.json` (Claude Desktop):
+
+```json
+{
+  "mcpServers": {
+    "pulsar": {
+      "command": "php",
+      "args": ["/path/to/pulsar-client-php/examples/mcp-server.php"],
+      "env": {
+        "PULSAR_BROKER_URL": "pulsar://localhost:6650",
+        "PULSAR_TOKEN": ""
+      }
+    }
+  }
+}
+```
+
+See [examples/mcp.md](examples/mcp.md) for full tool reference and testing instructions.
 
 ## License
 

@@ -11,6 +11,7 @@
     * [Schema](#Schema)
     * [Reader](#Reader)
     * [可选项配置](#可选项配置)
+    * [MCP Server（AI Agent 集成）](#MCP-ServerAI-Agent-集成)
     * [License](#License)
 
 ## 关于
@@ -485,6 +486,31 @@ $reader->close();
 
 * `MessageNotFound::Ignore`
 * `MessageNotFound::CommandParseFail`
+
+## MCP Server（AI Agent 集成）
+
+本项目内置 [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) stdio 服务器，让 AI Agent（Cursor、Claude Desktop 等）直接操作 Pulsar 消息队列。无需额外依赖。
+
+**工具：** `pulsar_publish`（发送）· `pulsar_consume`（消费）· `pulsar_peek`（只读浏览）
+
+**快速接入** — 添加到 `~/.cursor/mcp.json`（Cursor）或 `claude_desktop_config.json`（Claude Desktop）：
+
+```json
+{
+  "mcpServers": {
+    "pulsar": {
+      "command": "php",
+      "args": ["/path/to/pulsar-client-php/examples/mcp-server.php"],
+      "env": {
+        "PULSAR_BROKER_URL": "pulsar://localhost:6650",
+        "PULSAR_TOKEN": ""
+      }
+    }
+  }
+}
+```
+
+完整工具参考和测试说明请查看 [examples/mcp.md](examples/mcp.md)。
 
 ## License
 
