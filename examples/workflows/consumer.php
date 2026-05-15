@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 $options = new ConsumerOptions();
 
-$token = file_get_contents(__DIR__ . '/../../.github/jwt.token');
+$token = trim((string) file_get_contents(__DIR__ . '/../../.github/jwt.token'));
 $options->setAuthentication(new Jwt($token));
 
 $options->setConnectTimeout(3);

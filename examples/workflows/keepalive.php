@@ -65,7 +65,7 @@ class ProducerStore
         $options->setTopic($topic);
         $options->setCompression(Compression::ZLIB);
         $options->setKeepalive(true);
-        $token = file_get_contents(__DIR__ . '/../../.github/jwt.token');
+        $token = trim((string) file_get_contents(__DIR__ . '/../../.github/jwt.token'));
         $options->setAuthentication(new Jwt($token));
 
         $producer = new Producer('pulsar://localhost:6650', $options);
