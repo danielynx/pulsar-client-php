@@ -145,7 +145,7 @@ class Builder
         // metadata
         $metadata = new MessageMetadata();
         $metadata->setProducerName($this->producer->getName());
-        $metadata->setSequenceId(0);
+        $metadata->setSequenceId($this->sequenceID);
         $metadata->setPublishTime(time() * 1000);
         $metadata->setNumMessagesInBatch(count($this->messages));
         $metadata->setCompression($compressionProvider->getType());
